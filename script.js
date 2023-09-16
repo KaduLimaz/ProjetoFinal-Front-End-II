@@ -9,6 +9,7 @@ async function getCharacters(page, name = "") {
     const response = await api.get(`/character`, { params });
     
     const characters = response.data.results;
+    console.log(characters);
     const info = response.data.info;
     
 
@@ -34,7 +35,7 @@ function charactersRickMorty(characters) {
             alt="perfil"
           />
           <h2>${character.name}</h2>
-          <p>${character.status}</p>
+          
           <p>${character.species}</p>
           <div id='status'>
             <span id="spanStatus" >Status: ${character.status}</span>
