@@ -7,11 +7,13 @@ async function getCharacters(page, name = "") {
   try {
     const params = { page, name };
     const response = await api.get(`/character`, { params });
-
+    
     const characters = response.data.results;
+    const info = response.data.info;
     
 
     charactersRickMorty(characters);
+    updatePaginationText(info.pages)
     
   } catch (error) {
     console.log("Erro ao buscar", error);
@@ -57,6 +59,7 @@ function PaginationNext() {
   if (currentPage < 42) {
     currentPage++; // Incrementar para a próxima página
     getCharacters(currentPage);
+    updatePaginationText(info.pages)
   }
   
 }
@@ -66,9 +69,19 @@ function PaginationPrev(){
     if (currentPage > 1){
         currentPage--
         getCharacters(currentPage);
+        
+
     }
 }
 
+//contador de paginas 
+function updatePaginationText(totalPages) {
+    const currentPageElement = document.getElementById("currentPage");
+    const totalPagesElement = document.getElementById("totalPages");
+  
+    currentPageElement.textContent = currentPage;
+    totalPagesElement.textContent = 42;
+  }
 
 
 // Pesquisar personagem

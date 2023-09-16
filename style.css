@@ -33,28 +33,10 @@ main {
   justify-content: center;
 }
 
-/* .user-card {
-  background-color: #fff;
-  border-radius: 5px;
-  padding: 1rem;
-  margin: 1rem;
-  width: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.contador-Pag {
+  color: #000000;
 }
 
-.user-card img {
-  border-radius: 50%;
-  width: 5rem;
-  height: 5rem;
-  margin-bottom: 1rem
-}
-
-.user-card p {
-  margin: 0.5rem 0;
-  color: #666;
-} */
 
 #icone-header {
   position: absolute;
@@ -135,7 +117,7 @@ main {
   background-color: lightgray;
 }
 
-.btn-rickNext {
+.btn-rickNext,.btn-rickPrev  {
   background:#00ffff;
 background:    linear-gradient(#00ffff, #00ff00);
 border:        1px solid #556699;
@@ -149,20 +131,7 @@ text-shadow:   1px 1px #000000;
 transition: all 0.2s ease;
 cursor: pointer;
 }
-.btn-rickPrev {
-  background:#00ffff;
-background:    linear-gradient(#00ffff, #00ff00);
-border:        1px solid #556699;
-border-radius: 1000px;
-padding:       10px 35px;
-color:         #fafafa;
-display:       inline-block;
-font:          normal bold 16px/1 "Komika", cursive;
-text-align:    center;
-text-shadow:   1px 1px #000000;
-transition: all 0.2s ease;
-cursor: pointer;
-}
+
 
 button:hover {
   box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 3px 3px #CECFD1;
