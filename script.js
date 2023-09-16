@@ -1,11 +1,7 @@
 const charactersContainer = document.querySelector(".chars-container");
 const searchCharacterByName = document.getElementById("searchCharacter");
-// const pagination = document.getElementById("pagination");
-const btnNext = document.querySelector(".btn-rickNext");
-const btnPrev = document.querySelector(".btn-rickPrev");
 const searchCharacters = document.getElementById("searchCharacter");
 let currentPage = 1;
-
 
 async function getCharacters(page, name = "") {
   try {
@@ -13,19 +9,21 @@ async function getCharacters(page, name = "") {
     const response = await api.get(`/character`, { params });
 
     const characters = response.data.results;
-    const infos = response.data.info;
     
-    charactersRickMorty(characters);
-    displayPaginationNext(infos);
 
-    console.log(infos);
+    charactersRickMorty(characters);
+    
   } catch (error) {
     console.log("Erro ao buscar", error);
   }
 }
 
+
+// função para buscar as informações da API e lançar no HTML com CSS
 function charactersRickMorty(characters) {
+
   charactersContainer.innerHTML = "";
+
   characters.forEach((character) => {
     const cardCharacters = document.createElement("div");
     cardCharacters.classList.add("card");
@@ -35,32 +33,45 @@ function charactersRickMorty(characters) {
           />
           <h2>${character.name}</h2>
           <p>${character.status}</p>
-          <p>${character.species}</p>`;
+          <p>${character.species}</p>
+          <div id='status'>
+            <span id="spanStatus" >Status: ${character.status}</span>
+            <div class='statusColor ${
+              character.status == "Dead"
+                ? "dead"
+                : character.status == "Alive"
+                ? "alive"
+                : "unknown"
+            }'>
+            </div>
+            
+        </div>
+          `;
     charactersContainer.appendChild(cardCharacters);
   });
 }
 
+// botao para proxima pagina - linkado pelo onclick no HTML
+function PaginationNext() {
+    
+  if (currentPage < 42) {
+    currentPage++; // Incrementar para a próxima página
+    getCharacters(currentPage);
+  }
   
-
-  
- function displayPaginationNext(info) {
-     btnPrev.addEventListener("click",  async () => {
-    if (currentPage >= 2) {
-      currentPage-=1;
-      
-      await getCharacters(currentPage);
-    }
-  });
-
-   btnNext.addEventListener("click",  async () => {
-    if (currentPage < info.pages) {
-      currentPage+= 1;
-      
-      await getCharacters(currentPage);
-    }
-  });
 }
 
+// botao para voltar pagina - linkado pelo onclick no HTML
+function PaginationPrev(){
+    if (currentPage > 1){
+        currentPage--
+        getCharacters(currentPage);
+    }
+}
+
+
+
+// Pesquisar personagem
 searchCharacters.addEventListener("input", () => {
   currentPage = 1;
   getCharacters(currentPage, searchCharacters.value);
